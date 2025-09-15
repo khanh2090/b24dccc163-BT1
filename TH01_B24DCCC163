@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ứng dụng Đếm số</title>
+  <!-- React + ReactDOM từ CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    h2 {
+      color: darkblue;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  
+  <script type="text/babel" src="app.js"></script>
+</body>
+</html>
+unpkg.com
+JS
+const { useState } = React;
+
+// Component con chỉ hiển thị số
+function DisplayNumber({ value }) {
+  return <h2>Số hiện tại: {value}</h2>;
+}
+
+// Component cha
+function CounterApp() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      {/* Truyền state xuống component con */}
+      <DisplayNumber value={count} />
+
+      <div>
+        <button onClick={() => setCount(count - 1)}>-</button>
+        <button onClick={() => setCount(count + 1)}>+</button>
+      </div>
+    </div>
+  );
+}
+
+// Render ra giao diện
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<CounterApp />)
