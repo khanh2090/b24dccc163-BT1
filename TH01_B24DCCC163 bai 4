@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thẻ thông tin sinh viên</title>
+  
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      
+      background: #f9f9f9;
+    }
+    .card h3 {
+      margin: 0 0 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="bai4.js"></script>
+</body>
+</html>
+unpkg.com
+JS
+const { useState } = React;
+
+function StudentCard({ name, age, className }) {
+  const [showDetail, setShowDetail] = useState(false);
+
+  return (
+    <div className="card">
+      <h3>{name}</h3>
+      <button onClick={() => setShowDetail(!showDetail)}>
+        {showDetail ? "Ẩn chi tiết" : "Xem chi tiết"}
+      </button>
+      {showDetail && (
+        <p>
+          Tuổi: {age} - Lớp: {className}
+        </p>
+      )}
+    </div>
+  );
+}
+
+
+function StudentList() {
+  const students = [
+    { name: "Nguyễn Văn A", age: 20, className: "CNTT1" },
+    { name: "Trần Thị B", age: 21, className: "CNTT2" },
+    { name: "Lê Văn C", age: 19, className: "CNTT3" },
+  ];
+
+  return (
+    <div>
+      <h2>Thẻ thông tin sinh viên</h2>
+      {students.map((s, index) => (
+        <StudentCard
+          key={index}
+          name={s.name}
+          age={s.age}
+          className={s.className}
+        />
+      ))}
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<StudentList />) ;
