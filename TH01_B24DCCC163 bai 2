@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>bai2</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 8px 15px;
+      font-size: 16px;
+      margin-left: 8px;
+      cursor: pointer;
+    }
+    ul {
+      margin-top: 20px;
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" src="bai2.js"></script>
+</body>
+</html>
+unpkg.com
+JS
+const { useState } = React;
+
+
+function Task({ text }) {
+  return <li>{text}</li>;
+}
+
+
+function TodoApp() {
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = () => {
+    if (task.trim() !== "") {
+      setTasks([...tasks, task]);
+      setTask(""); 
+    }
+  };
+
+  return (
+    <div>
+      <h2>Danh sách công việc</h2>
+      <input
+        type="text"
+        placeholder="Nhập công việc..."
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+      <button onClick={addTask}>Thêm</button>
+
+      <ul>
+        {tasks.map((item, index) => (
+          <Task key={index} text={item} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// Render ra giao diện
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<TodoApp />)
