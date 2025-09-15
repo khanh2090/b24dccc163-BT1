@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>bai3</title>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .box {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      border: 2px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 10px;
+    }
+    .color-list {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .color-item {
+      margin: 20px ;
+      border: 2px solid #333;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .color-item:hover {
+      
+      text-decoration: underline;
+    }
+    .active {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="bai3.js"></script>
+</body>
+</html>
+unpkg.com
+JS
+const { useState } = React;
+
+function ColorBox({ color }) {
+  return (
+    <div className="box" style={{ backgroundColor: color }}>
+      {}
+    </div>
+  );
+}
+
+function ColorApp() {
+  const colors = ["red", "green", "blue", "yellow"];
+  const [currentColor, setCurrentColor] = useState("white");
+
+  return (
+    <div>
+      <h2>Bài 3</h2>
+      <ColorBox color={currentColor} />
+
+      {}
+      <div className="color-list">
+        {colors.map((c, index) => (
+          <span
+            key={index}
+            className={`color-item ${currentColor === c ? "active" : ""}`}
+            style={{ color: "#222" }} 
+            onClick={() => setCurrentColor(c)}
+          >
+            {c.toUpperCase()}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<ColorApp />)
