@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đồng hồ React</title>
+  
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .clock {
+      font-size: 28px;
+      font-weight: bold;
+      
+      border: 2px solid #444;
+      display: inline-block;
+      padding: 15px 25px;
+      border-radius: 10px;
+      background: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="bai5.js"></script>
+</body>
+</html>
+unpkg.com
+
+const { useState, useEffect } = React;
+
+function TimeDisplay({ time }) {
+  return <div className="clock">{time}</div>;
+}
+
+function Clock() {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div>
+      <h2>Đồng hồ</h2>
+      <TimeDisplay time={time} />
+    </div>
+  );
+}
+
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Clock />);
